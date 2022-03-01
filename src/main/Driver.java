@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class Driver {
     static void menu() {
+        System.out.println();
         System.out.println("1 - Add Item");
         System.out.println("2 - Update Item");
         System.out.println("3 - Display Items");
@@ -28,11 +29,11 @@ public class Driver {
             pointer = scanner.nextInt();
             switch (pointer) {
                 case 1 : {
-                    System.out.println("Enter item name :");
+                    System.out.println("Enter item name : ");
                     String name = scanner.next();
-                    System.out.println("Enter item stock :");
+                    System.out.println("Enter item stock : ");
                     int itemStock = scanner.nextInt();
-                    System.out.println("Enter item points");
+                    System.out.println("Enter item points : ");
                     int itemPoint = scanner.nextInt();
                     addItem(inventory, name, itemStock, itemPoint);
 //                    addItem(inventory, "Phone", 100,10);
@@ -40,11 +41,11 @@ public class Driver {
                     break;
                 }
                 case 2 : {
-                    System.out.println("Enter item name :");
+                    System.out.println("Enter item name : ");
                     String name = scanner.next();
-                    System.out.println("Enter new item stock :");
+                    System.out.println("Enter new item stock : ");
                     int itemStock = scanner.nextInt();
-                    System.out.println("Enter new item points");
+                    System.out.println("Enter new item points : ");
                     int itemPoint = scanner.nextInt();
                     updateItem(inventory, name, itemStock, itemPoint);
 //                    updateItem(inventory, "Phone", 50,30);
@@ -81,6 +82,10 @@ public class Driver {
     }
 
     public static void displayItems(List<Item> inventory){
+
+        System.out.println("================================\n" +
+                            "Item\t\t" + "Stock\t\t" + "Points" + "\n" +
+                            "================================");
         for (Item item: inventory) {
             System.out.println(item);
         }
@@ -104,17 +109,17 @@ public class Driver {
 
     public static void showItemSold(List<Item> inventory, String itemName){
         for(Item item : inventory){
-            if (itemName == item.getItemName())
+            if (itemName.equals(item.getItemName()))
                 System.out.println("Sold Quantity of " + itemName + " = " + item.getItemSold());
         }
     }
 
     public static void buyItem(List<Item> inventory, String itemName, int qty, int userPoints){
         for (Item item : inventory){
-            if (itemName == item.getItemName()){
+            if (itemName.equals(item.getItemName())){
                 if(item.getItemStock() > 0 && qty > 0 && qty <=item.getItemStock()){
                     if (userPoints >= qty * item.getItemPoints()){
-                        item.setItemSold(qty);
+                        item.setItemSold(item.getItemSold() + qty);
                         item.setItemStock(item.getItemStock() - qty);
                         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                         LocalDateTime now = LocalDateTime.now();
@@ -122,11 +127,12 @@ public class Driver {
                             System.out.println(qty + " " + item.getItemName() + "s have been purchased [" + dtf.format(now) + "]");
                         else
                             System.out.println(qty + " " + item.getItemName() +  " has been purchased [" + dtf.format(now) + "]");
+                        System.out.println(item.getItemName() + "'s current stock = " + item.getItemStock());
                     } else {
                         System.out.println("Not enough points");
                     }
                 } else {
-                    System.out.println("Item is sold out");
+                    System.out.println(item.getItemName() + " is sold out");
                 }
             }
         }

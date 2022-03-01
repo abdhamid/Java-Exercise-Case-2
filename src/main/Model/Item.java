@@ -46,9 +46,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return  "================================\n" +
-                "Item\t\t" + "Stock\t\t" + "Points" + "\n" +
-                "================================\n" +
-                String.format("%s%10d%10d", itemName, itemStock, itemPoints);
+        return String.format("%s\t%10d\t%10d", itemName, itemStock, itemPoints);
     }
 }
