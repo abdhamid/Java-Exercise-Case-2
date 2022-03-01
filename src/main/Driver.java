@@ -69,7 +69,7 @@ public class Driver {
                     System.out.println("Enter item name : ");
                     String name = scanner.next();
                     showItemSold(inventory, name);
-                    break
+                    break;
                 }
             }
         }
