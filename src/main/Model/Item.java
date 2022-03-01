@@ -46,6 +46,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return String.format("%s\t%10d\t%10d", itemName, itemStock, itemPoints);
+        return String.format("%-13s %-13d %-13d", itemName, itemStock, itemPoints);
     }
 }

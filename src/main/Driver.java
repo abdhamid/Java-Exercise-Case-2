@@ -37,7 +37,7 @@ public class Driver {
                     int itemPoint = scanner.nextInt();
                     addItem(inventory, name, itemStock, itemPoint);
 //                    addItem(inventory, "Phone", 100,10);
-                    System.out.println("Item Added");
+//                    System.out.println("Item Added");
                     break;
                 }
                 case 2 : {
@@ -78,11 +78,29 @@ public class Driver {
     }
 
     public static void addItem(List<Item> inventory, String itemName, int itemStock, int itemPoint){
-        inventory.add(new Item(itemName, itemStock, itemPoint));
+        boolean isItemExist = false;
+        if (inventory.size() > 0){
+            for (Item item : inventory){
+                if (itemName.equals(item.getItemName())) {
+                    isItemExist = true;
+                    break;
+                }
+            }
+            if (isItemExist)
+                System.out.println("Cannot duplicate item!");
+            else {
+                inventory.add(new Item(itemName, itemStock, itemPoint));
+                System.out.println(itemName + " is added");
+            }
+        }
+        else {
+            inventory.add(new Item(itemName, itemStock, itemPoint));
+            System.out.println(itemName + " is added");
+        }
+        
     }
 
     public static void displayItems(List<Item> inventory){
-
         System.out.println("================================\n" +
                             "Item\t\t" + "Stock\t\t" + "Points" + "\n" +
                             "================================");
