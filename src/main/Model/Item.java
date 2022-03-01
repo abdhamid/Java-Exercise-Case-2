@@ -12,18 +12,6 @@ public class Item {
         this.itemPoints = itemPoints;
     }
 
-    //function to update item info
-    //parameter : Item Name, Stock, Points
-    public void updateItem(String itemName, int itemStock, int itemPoints){
-        setItemName(itemName);
-        setItemStock(itemStock);
-        setItemPoints(itemPoints);
-    }
-
-    //function to show history of item sales
-    //
-    public void showItemSalesHistory(){}
-
     public String getItemName() {
         return itemName;
     }
@@ -56,13 +44,11 @@ public class Item {
         this.itemSold = itemSold;
     }
 
-
     @Override
     public String toString() {
-        return "main.Model.Carrot{" +
-                "itemName='" + itemName + '\'' +
-                ", itemStock=" + itemStock +
-                ", itemPoints=" + itemPoints +
-                '}';
+        return  "================================\n" +
+                "Item\t\t" + "Stock\t\t" + "Points" + "\n" +
+                "================================\n" +
+                String.format("%s%10d%10d", itemName, itemStock, itemPoints);
     }
 }
