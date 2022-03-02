@@ -74,7 +74,7 @@ public class Driver {
                 }
             }
         }
-        while (pointer != 0);
+        while (pointer !=  0);
     }
 
     public static void addItem(List<Item> inventory, String itemName, int itemStock, int itemPoint){
@@ -135,7 +135,11 @@ public class Driver {
     public static void buyItem(List<Item> inventory, String itemName, int qty, int userPoints){
         for (Item item : inventory){
             if (itemName.equals(item.getItemName())){
-                if(item.getItemStock() > 0 && qty > 0 && qty <=item.getItemStock()){
+                if(item.getItemStock() > 0 && qty > 0 ){
+                    if (qty > item.getItemStock()){
+                        System.out.println("There's only " + item.getItemStock() + " of " + item.getItemName());
+                        break;
+                    }
                     if (userPoints >= qty * item.getItemPoints()){
                         item.setItemSold(item.getItemSold() + qty);
                         item.setItemStock(item.getItemStock() - qty);
@@ -155,9 +159,5 @@ public class Driver {
             }
         }
     }
-
-//    public static void manageItem(String itemName){
-//
-//    }
 
 }
